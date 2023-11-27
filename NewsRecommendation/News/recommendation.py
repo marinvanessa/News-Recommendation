@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
 # Read the CSV file
-df_news = pd.read_csv("E:\\SAC\\NewsRecommendation\\NewsRecommendation\\Dataset\\bbc_news.csv")
+df_news = pd.read_csv("E:/sac2/NewsRecommendation/Dataset/bbc_news.csv")
 
 # Drop duplicates
 df_without_duplicated_guid = df_news.drop_duplicates('guid')
