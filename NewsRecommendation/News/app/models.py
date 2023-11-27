@@ -20,4 +20,3 @@ class News(models.Model):
 class UserLikes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     news = models.ForeignKey(News, on_delete=models.CASCADE)
-    like = models.BooleanField(default=True)

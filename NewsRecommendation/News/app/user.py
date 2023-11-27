@@ -2,7 +2,7 @@ import json
 
 # Create your views here.
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseNotFound, HttpResponseServerError
 from django.views.decorators.csrf import csrf_exempt
 
 from app.forms import (UserForm)
@@ -47,5 +47,29 @@ def delete_user(request, user_id):
             return JsonResponse({'message': f'User with ID {user_id} deleted successfully'})
         except User.DoesNotExist:
             return JsonResponse({'error': f'User with ID {user_id} does not exist'}, status=404)
+    else:
+        return JsonResponse({'error': 'Only DELETE requests are allowed'}, status=405)
+
+@csrf_exempt
+def get_user_by_id(request, user_id):
+    if request.method == 'GET':
+        try:
+            user = User.objects.get(id=user_id)
+            user_data = {'id': user.id, 'username': user.username}
+            return JsonResponse({'user': user_data})
+        except User.DoesNotExist:
+            return HttpResponseNotFound('User not found')
+    else:
+        return JsonResponse({'error': 'Only GET requests are allowed'}, status=405)
+
+@csrf_exempt
+def delete_all_users(request):
+    if request.method == 'DELETE':
+        try:
+            # Delete all users
+            User.objects.all().delete()
+            return JsonResponse({'message': 'All users deleted successfully'})
+        except Exception as e:
+            return HttpResponseServerError(f'Error deleting users: {str(e)}')
     else:
         return JsonResponse({'error': 'Only DELETE requests are allowed'}, status=405)

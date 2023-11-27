@@ -17,14 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-#from News.app.views import create_user
+from app.user import *
+from app.news import *
+from app.likes import *
 
-from app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('create_user/', create_user, name='create_user'),
     path('get_all_users/', get_all_users, name='get_all_users'),
     path('delete_user/<int:user_id>/', delete_user, name='delete_user'),
+    path('get_user_by_id/<int:user_id>/', get_user_by_id, name='get_user_by_id'),
+    path('delete_all_users/', delete_all_users, name='delete_all_users'),
+    path('create_news/', create_news, name='create_news'),
+    path('get_all_news/', get_all_news, name='get_all_news'),
+    path('delete_news/<int:news_id>/', delete_news, name='delete_news'),
+    path('get_news_by_id/<int:news_id>/', get_news_by_id, name='get_news_by_id'),
+    path('delete_all_news/', delete_all_news, name='delete_all_news'),
+    path('create_user_likes/', create_user_likes, name='create_user_likes'),
 
 ]
