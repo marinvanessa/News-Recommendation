@@ -34,6 +34,8 @@ urlpatterns = [
     path('delete_news/<int:news_id>/', delete_news, name='delete_news'),
     path('get_news_by_id/<int:news_id>/', get_news_by_id, name='get_news_by_id'),
     path('delete_all_news/', delete_all_news, name='delete_all_news'),
+    path('delete_all_news/', delete_all_news, name='delete_all_news'),
     path('create_user_likes/', create_user_likes, name='create_user_likes'),
+    path('recommend_news/<int:news_id>/', recommend_news, name='recommend_news'),
 
 ]
