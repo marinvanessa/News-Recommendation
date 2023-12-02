@@ -14,13 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import sys
+
 from django.contrib import admin
 from django.urls import path
 
-from app.user import *
-from app.news import *
-from app.likes import *
-
+from app.controller.news import create_news, get_all_news, get_news_by_id, recommend_news, delete_news, delete_all_news
+from app.controller.likes import create_user_likes
+from app.controller.user import create_user, get_all_users, get_user_by_id, delete_user, delete_all_users
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,5 +38,4 @@ urlpatterns = [
     path('delete_all_news/', delete_all_news, name='delete_all_news'),
     path('create_user_likes/', create_user_likes, name='create_user_likes'),
     path('recommend_news/<int:news_id>/', recommend_news, name='recommend_news'),
-
 ]

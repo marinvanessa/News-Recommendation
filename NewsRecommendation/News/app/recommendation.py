@@ -33,9 +33,13 @@ def recommend_top_news(news_data, cosine_sim, news_id):
         weighted_score = similarity_score * (1 + likes_count)
         weighted_scores.append((i, weighted_score))
 
+
     weighted_scores = sorted(weighted_scores, key=lambda x: x[1], reverse=True)
 
-    recommended_indices = [i for i, _ in weighted_scores if i != idx]
+    recommended_indices = []
+    for i, _ in weighted_scores:
+        if i != idx:
+            recommended_indices.append(i)
 
     top_3_recommendations = df['link'].iloc[recommended_indices[:3]].values
 
