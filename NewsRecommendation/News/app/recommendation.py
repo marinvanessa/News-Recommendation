@@ -33,7 +33,6 @@ def recommend_top_news(news_data, cosine_sim, news_id):
         weighted_score = similarity_score * (1 + likes_count)
         weighted_scores.append((i, weighted_score))
 
-
     weighted_scores = sorted(weighted_scores, key=lambda x: x[1], reverse=True)
 
     recommended_indices = []
@@ -47,5 +46,3 @@ def recommend_top_news(news_data, cosine_sim, news_id):
         return JsonResponse({'recommendations': '0 news recommendations'})
 
     return JsonResponse({'recommendations': list(top_3_recommendations)})
-
-
