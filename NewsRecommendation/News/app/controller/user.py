@@ -24,7 +24,12 @@ def create_user(request):
         else:
             return JsonResponse({'error': 'Invalid data'}, status=400)
 
-    return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
+    elif request.method == 'GET':
+        form = UserForm()
+        return render(request, 'app/register.html', {'form': form})
+
+    return JsonResponse({'error': 'Only GET and POST requests are allowed'}, status=405)
+
 @csrf_exempt
 def get_all_users(request):
     if request.method == 'GET':
