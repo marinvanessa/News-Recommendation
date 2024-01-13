@@ -8,19 +8,25 @@ from ..recommendation import cleaning_data, calculate_matrix_of_similarity, reco
 
 
 @csrf_exempt
-def create_news(request):
+def create_news_list(request):
     if request.method == 'POST':
         if request.content_type == 'application/json':
             data = json.loads(request.body.decode('utf-8'))
-            form = NewsForm(data)
-        else:
-            form = NewsForm(request.POST)
+            news_list = data.get('news_list', [])
 
-        if form.is_valid():
-            news = form.save()
-            return JsonResponse({'message': 'News created successfully', 'news_id': news.id})
+            created_news_ids = []
+
+            for news_data in news_list:
+                form = NewsForm(news_data)
+                if form.is_valid():
+                    news = form.save()
+                    created_news_ids.append(news.id)
+                else:
+                    return JsonResponse({'error': 'Invalid data', 'errors': form.errors}, status=400)
+
+            return JsonResponse({'message': 'News created successfully', 'created_news_ids': created_news_ids})
         else:
-            return JsonResponse({'error': 'Invalid data', 'errors': form.errors}, status=400)
+            return JsonResponse({'error': 'Invalid content type. Expected application/json'}, status=400)
 
     return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
 

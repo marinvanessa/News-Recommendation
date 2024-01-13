@@ -15,8 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from app.controller.likes import create_user_likes
-from app.controller.news import create_news, get_all_news, get_news_by_id, recommend_news, delete_news, delete_all_news
+from app.controller.news import create_news_list, get_all_news, get_news_by_id, recommend_news, delete_news, delete_all_news
 from app.controller.user import create_user, get_all_users, get_user_by_id, delete_user, delete_all_users
 from django.contrib import admin
 from django.urls import path
@@ -31,12 +30,11 @@ urlpatterns = [
     path('delete_user/<int:user_id>/', delete_user, name='delete_user'),
     path('get_user_by_id/<int:user_id>/', get_user_by_id, name='get_user_by_id'),
     path('delete_all_users/', delete_all_users, name='delete_all_users'),
-    path('create_news/', create_news, name='create_news'),
+    path('create_news_list/', create_news_list, name='create_news_list'),
     path('get_all_news/', get_all_news, name='get_all_news'),
     path('delete_news/<int:news_id>/', delete_news, name='delete_news'),
     path('get_news_by_id/<int:news_id>/', get_news_by_id, name='get_news_by_id'),
     path('delete_all_news/', delete_all_news, name='delete_all_news'),
     path('delete_all_news/', delete_all_news, name='delete_all_news'),
-    path('create_user_likes/', create_user_likes, name='create_user_likes'),
     path('recommend_news/<int:news_id>/', recommend_news, name='recommend_news'),
 ]
