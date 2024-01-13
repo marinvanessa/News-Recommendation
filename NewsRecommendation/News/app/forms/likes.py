@@ -5,4 +5,4 @@ from django import forms
 class UserLikesForm(forms.ModelForm):
     class Meta:
         model = UserLikes
-        fields = ['user', 'news']
+        fields = ['user', 'news', 'rating']
