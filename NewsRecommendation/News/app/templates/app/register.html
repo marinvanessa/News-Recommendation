@@ -6,42 +6,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'styles/register.css' %}">
 </head>
-<body class="center-form">
-<div>
-    <h2>User Registration</h2>
-    <form id="registrationForm" method="post" action="{% url 'create_user' %}">
-        {% csrf_token %}
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="First Name" aria-label="First Name"
-                   aria-describedby="basic-addon1">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name"
-                   aria-describedby="basic-addon1">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="E-mail" aria-label="E-mail"
-                   aria-describedby="basic-addon1">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                   aria-describedby="basic-addon1">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Password" aria-label="Username"
-                   aria-describedby="basic-addon1">
-        </div>
-        <div class="mb-3">
-            <button type="submit" id="submit-btt" class="btn btn-primary">Register</button>
-        </div>
-    </form>
+<body>
+<h2>User Registration</h2>
+<form id="registrationForm" method="post" action="{% url 'create_user' %}">
+    {% csrf_token %}
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" required><br>
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" required><br>
+    <label for="email">E-mail:</label>
+    <input type="text" id="email" name="email" required><br>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password" required><br>
 
     <!-- Placeholder for error message -->
     <div id="error-message" style="color: red;"></div>
-</div>
+
+    <!-- Butonul de înregistrare cu tip submit -->
+    <button type="submit">Register</button>
+</form>
 
 
 <script>

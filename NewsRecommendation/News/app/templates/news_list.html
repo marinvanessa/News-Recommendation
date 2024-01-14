@@ -31,11 +31,9 @@
     {% endfor %}
 </ul>
 <div class="recommendationButton">
-    <!-- Check if user_id is present in the session before using it -->
     {% if request.session.user_id %}
         <a href="{% url 'recommend' user_id=request.session.user_id %}" class="button">Get Recommendations</a>
     {% else %}
-        <!-- Provide a fallback or redirect to login if user_id is not present -->
         <a href="{% url 'user_login' %}" class="button">Login to Get Recommendations</a>
     {% endif %}
 </div>

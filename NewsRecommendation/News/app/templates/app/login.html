@@ -5,33 +5,26 @@
     <title>User Login</title>
 
     <!-- Add Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'styles/login.css' %}">
 
 </head>
-<body class="center-form">
-<div>
-    <h2>Already have an account? Login here:</h2>
-    <form>
-        {% csrf_token %}
 
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                   aria-describedby="basic-addon1">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Password" aria-label="Username"
-                   aria-describedby="basic-addon1">
-        </div>
-        <div class="mb-3" id="login-bt">
-            <button type="submit" id="submit-btt" class="btn btn-primary">Submit</button>
-        </div>
+<h2>Already have an account? Login here:</h2>
+<form id="loginForm" method="post" action="{% url 'user_login' %}">
+        {% csrf_token %}
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username" name="login-username" required><br>
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" name="login-password" required><br>
+
+        <!-- Mesajul de eroare în caz de eșec la autentificare -->
+        <div id="login-error-message" style="color: red;"></div>
+
+        <!-- Butonul de login cu tip submit -->
+        <button type="submit">Login</button>
     </form>
 
-    <p>Don't have an account? <a href="{% url 'create_user' %}">Register here</a>.</p>
-
-</div>
-</body>
+<p>Don't have an account? <a href="{% url 'create_user' %}">Register here</a>.</p>
 
 
 <script>

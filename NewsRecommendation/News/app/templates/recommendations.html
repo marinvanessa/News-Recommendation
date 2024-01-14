@@ -11,6 +11,7 @@
 
 <h1>Recommendations</h1>
 
+
 {% if recommendations %}
 <ul>
     {% for news_item in recommendations %}
@@ -33,6 +34,8 @@
     </li>
     {% endfor %}
 </ul>
+<a href="{% url 'get_all_news' %}"><button>Home</button></a>
+
 {% else %}
 <p>No recommendations available.</p>
 {% endif %}
