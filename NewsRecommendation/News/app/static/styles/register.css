@@ -1,32 +1,133 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    --h: 212deg;
+    --l: 43%;
+    --brandColor: hsl(var(--h), 71%, var(--l));
+    font-family: Montserrat, sans-serif;
     margin: 0;
+    background-color: whitesmoke;
 }
 
 .registration-container {
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: whitesmoke;
+    overflow: hidden;
+}
+
+h1 {
+    padding: 20px;
+    margin-top: 0;
     text-align: center;
+    color: var(--brandColor);
+    font-family: Hervetica;
+    font-size: 36px;
+    font-weight: bold;
 }
 
-.h2 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+img {
+    width: 75%;
+    height:80vh;
 }
 
-.entry-reg {
-    padding-bottom: 20px;
+.register-box {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 600px;
+    background: var(--brandColor);
+    border-radius: 10px;
+
+}
+
+
+.register-box form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+
+form .txt-field {
+    position: relative;
+    border-bottom: 2px solid whitesmoke;
+    margin: 30px 0;
+}
+
+.txt-field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    font-family: Hervetica;
+    color: whitesmoke;
+}
+
+.txt-field label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    font-family: Hervetica;
+    font-size: 16px;
+    color: whitesmoke;
+    transition: .5s;
+    transform: translateY(-50%);
+}
+
+.txt-field span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: whitesmoke;
+}
+
+.txt-field input:focus ~ label,
+.txt-field input:valid ~ label {
+    top: -5px;
+    color: whitesmoke;
+}
+
+.txt-field input:focus ~ span::before,
+.txt-field input:focus ~ span::before {
     width: 100%;
 }
 
-.entry-reg input {
-    border-radius: 5px;
-    width: 100%;
+.register-box .title-img {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    font-family: Helvetica; /* Corrected font-family */
+    border-bottom: 2px solid whitesmoke;
+    color: whitesmoke;
+    padding-top: 10px;
 }
+
 
 .bttn-register {
-    background-color: gray;
-    color: #1b1b1b;
-    border-radius: 5px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 100%;
+    background: whitesmoke;
+    border: 2px solid;
+    border-radius: 10px;
+    height: 30px;
+    outline: none;
+    font-size: 16px;
+    font-family: Hervetica;
+    color: var(--brandColor);
+    font-weight: bold;
+    cursor: pointer;
+    margin: 30px 0 30px 0;
 }
+
+.bttn-register:hover {
+    border-color: var(--brandColor);
+    transition: .5s;
+}
+
