@@ -14,13 +14,13 @@
     {% for news_item in news_data %}
     <li style="--i: {{ forloop.counter }}">
         <h3>{{ news_item.title }}</h3>
-        <p>{{ news_item.description }}
+        <p> Description: {{ news_item.description }}
         <a href="{{ news_item.link }}" target="_blank">Read more</a>
         </p>
 
         <!-- Display the rating or 0 if not available -->
         <div>
-            <strong>Rating:</strong> {{ news_item.rating }}
+            <p>Rating: {{ news_item.rating }}</p>
         </div>
 
         <!-- Form to submit a new rating -->

@@ -76,7 +76,7 @@ p {
 li {
     position: relative;
     counter-increment: list;
-    max-width: 45rem;
+    max-width: 70rem;
     margin: 2rem auto;
     padding: 2rem 1rem 1rem;
     box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
