@@ -1,30 +1,43 @@
-<!-- Al doilea formular pentru autentificare (login) -->
-<h2>Already have an account? Login here:</h2>
-<form id="loginForm" method="post" action="{% url 'user_login' %}">
-    {% csrf_token %}
-    <label for="login-username">Username:</label>
-    <input type="text" id="login-username" name="login-username" required><br>
-    <label for="login-password">Password:</label>
-    <input type="password" id="login-password" name="login-password" required><br>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
 
-    <!-- Mesajul de eroare în caz de eșec la autentificare -->
-    <div id="login-error-message" style="color: #a600ff;"></div>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
 
-    <!-- Butonul de login cu tip submit -->
-    <button type="submit">Login</button>
-</form>
+</head>
+<body class="center-form">
+<div>
+    <h2>Already have an account? Login here:</h2>
+    <form>
+        {% csrf_token %}
 
-<!-- Adăugați un link sau buton pentru a merge la pagina de înregistrare -->
-<p>Don't have an account? <a href="{% url 'create_user' %}">Register here</a>.</p>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                   aria-describedby="basic-addon1">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Password" aria-label="Username"
+                   aria-describedby="basic-addon1">
+        </div>
+        <div class="mb-3" id="login-bt">
+            <button type="submit" id="submit-btt" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <p>Don't have an account? <a href="{% url 'create_user' %}">Register here</a>.</p>
+
+</div>
+</body>
 
 
 <script>
-    // Adăugați un ascultător de evenimente pentru butonul de login
     document.getElementById("loginForm").addEventListener("submit", async function (event) {
-        // Opriți ascultătorul de evenimente pentru formularul de login
         event.preventDefault();
 
-        // AJAX login aici
 
         const response = await fetch("{% url 'user_login' %}", {
             method: "POST",
@@ -41,10 +54,7 @@
         const data = await response.json();
 
         if (response.ok) {
-            // Verificați dacă există o proprietate redirect_url în răspunsul JSON
-            // Redirecționați către main_page dacă autentificarea este reușită
             window.location.replace("{% url 'get_all_news' %}");
-            // Alternatively, you can use window.location.assign("{% url 'create_user' %}");
         } else {
             document.getElementById("login-error-message").innerText = data.error;
         }
