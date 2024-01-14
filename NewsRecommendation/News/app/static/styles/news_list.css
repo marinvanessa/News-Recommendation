@@ -160,7 +160,7 @@ li::before {
 
 .floating-button-container {
     position: fixed;
-    top: 20px;
+    bottom: 20px;
     right: 20px;
     background-color: var(--brandColor);
     color: white;
@@ -173,13 +173,18 @@ li::before {
     text-decoration: none;
 }
 
-/*.floating-button-container:hover {*/
-/*    background-color: var(--brandColor);*/
-/*}*/
+.floating-button-container-1 {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
 
-/*.floating-button-container {*/
-/*    position: fixed;*/
-/*    top: 20px;*/
-/*    left: 20px;*/
-/*    z-index: 1;*/
-/*}*/
+.floating-button-1 {
+    display: block;
+    padding: 10px;
+    background-color: var(--brandColor);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

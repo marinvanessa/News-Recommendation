@@ -30,11 +30,11 @@
     </li>
     {% endfor %}
 </ol>
-<div class="recommendationButton">
+<div class="floating-button-container-1">
     {% if request.session.user_id %}
-    <a href="{% url 'recommend' user_id=request.session.user_id %}" class="button">Get Recommendations</a>
+    <a href="{% url 'recommend' user_id=request.session.user_id %}" class="floating-button-1">Get Recommendations</a>
     {% else %}
-    <a href="{% url 'user_login' %}" class="button">Login to Get Recommendations</a>
+    <a href="{% url 'user_login' %}" class="floating-button-1">Login to Get Recommendations</a>
     {% endif %}
 </div>
 
