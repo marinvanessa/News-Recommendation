@@ -1,9 +1,9 @@
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from .user import CustomUser
-from .news import News
+from django.db import models
 
-from django.core.validators import MaxValueValidator, MinValueValidator
+from .news import News
+from .user import CustomUser
+
 
 class UserLikes(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
