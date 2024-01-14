@@ -1,6 +1,7 @@
 import json
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseServerError
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
 from ..forms.news import (NewsForm)
 from ..models.news import News
 
@@ -35,12 +36,12 @@ def create_news_list(request):
 def get_all_news(request):
     if request.method == 'GET':
         news = News.objects.all()
-        news_data = [{'id': news.id, 'title': news.title, 'description': news.description, 'link': news.link} for news
-                     in news]
-        return JsonResponse({'news': news_data})
+        news_data = [{'id': news_item.id, 'title': news_item.title, 'description': news_item.description, 'link': news_item.link} for news_item in news]
+
+        # Render the HTML template with the news data
+        return render(request, 'news_list.html', {'news_data': news_data})
     else:
         return JsonResponse({'error': 'Only GET requests are allowed'}, status=405)
-
 
 @csrf_exempt
 def get_news_by_id(request, news_id):

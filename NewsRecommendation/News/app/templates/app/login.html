@@ -1,0 +1,52 @@
+<!-- Al doilea formular pentru autentificare (login) -->
+<h2>Already have an account? Login here:</h2>
+<form id="loginForm" method="post" action="{% url 'user_login' %}">
+    {% csrf_token %}
+    <label for="login-username">Username:</label>
+    <input type="text" id="login-username" name="login-username" required><br>
+    <label for="login-password">Password:</label>
+    <input type="password" id="login-password" name="login-password" required><br>
+
+    <!-- Mesajul de eroare în caz de eșec la autentificare -->
+    <div id="login-error-message" style="color: #a600ff;"></div>
+
+    <!-- Butonul de login cu tip submit -->
+    <button type="submit">Login</button>
+</form>
+
+<!-- Adăugați un link sau buton pentru a merge la pagina de înregistrare -->
+<p>Don't have an account? <a href="{% url 'create_user' %}">Register here</a>.</p>
+
+
+<script>
+    // Adăugați un ascultător de evenimente pentru butonul de login
+    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+        // Opriți ascultătorul de evenimente pentru formularul de login
+        event.preventDefault();
+
+        // AJAX login aici
+
+        const response = await fetch("{% url 'user_login' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}",
+            },
+            body: JSON.stringify({
+                username: document.getElementById("login-username").value,
+                password: document.getElementById("login-password").value,
+            }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Verificați dacă există o proprietate redirect_url în răspunsul JSON
+            // Redirecționați către main_page dacă autentificarea este reușită
+            window.location.replace("{% url 'get_all_news' %}");
+            // Alternatively, you can use window.location.assign("{% url 'create_user' %}");
+        } else {
+            document.getElementById("login-error-message").innerText = data.error;
+        }
+    });
+</script>

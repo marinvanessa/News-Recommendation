@@ -1,0 +1,27 @@
+<!-- your_app/templates/recommendations.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations</title>
+</head>
+<body>
+
+<h1>Recommendations</h1>
+
+{% if recommendations %}
+    <ul>
+        {% for news_item in recommendations %}
+            <li>
+                <strong>{{ news_item.title }}</strong>: {{ news_item.description }} - <a href="{{ news_item.link }}" target="_blank">Read more</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No recommendations available.</p>
+{% endif %}
+
+</body>
+</html>

@@ -20,11 +20,12 @@ from app.controller.user import create_user, get_all_users, get_user_by_id, dele
 from django.contrib import admin
 from django.urls import path
 from app.controller.user import create_user
-from django.views.generic import RedirectView
+from app.controller.views import recommend
+from app.controller.user import user_login
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='create_user/', permanent=False), name='index'),
     path('admin/', admin.site.urls),
+    path('', user_login, name='home'),
     path('create_user/', create_user, name='create_user'),
     path('get_all_users/', get_all_users, name='get_all_users'),
     path('delete_user/<int:user_id>/', delete_user, name='delete_user'),
@@ -37,4 +38,6 @@ urlpatterns = [
     path('delete_all_news/', delete_all_news, name='delete_all_news'),
     path('delete_all_news/', delete_all_news, name='delete_all_news'),
     path('recommend_news/<int:news_id>/', recommend_news, name='recommend_news'),
+    path('recommend/<int:user_id>/', recommend, name='recommend'),
+    path('login/', user_login, name='user_login'),
 ]
