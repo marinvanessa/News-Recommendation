@@ -10,9 +10,9 @@
 
 <h1>News List</h1>
 
-<ul id="newsList">
+<ol style="--length: {{ news_data|length }}" role="list">
     {% for news_item in news_data %}
-    <li class="newsItem">
+    <li style="--i: {{ forloop.counter }}">
         <h3>{{ news_item.title }}</h3>
         <p>{{ news_item.description }}
         <a href="{{ news_item.link }}" target="_blank">Read more</a>
@@ -33,7 +33,7 @@
         </form>
     </li>
     {% endfor %}
-</ul>
+</ol>
 <div class="recommendationButton">
     {% if request.session.user_id %}
     <a href="{% url 'recommend' user_id=request.session.user_id %}" class="button">Get Recommendations</a>
