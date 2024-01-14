@@ -10,27 +10,55 @@
 
 <h1>News List</h1>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const starRatingForm = document.querySelector('.star-rating-form');
+        const starInputs = document.querySelectorAll('.star-rating input');
+
+        starInputs.forEach(function (input) {
+            input.addEventListener('click', function () {
+                starRatingForm.submit();
+            });
+        });
+    });
+</script>
+
 <ol style="--length: {{ news_data|length }}" role="list">
     {% for news_item in news_data %}
     <li style="--i: {{ forloop.counter }}">
         <h3>{{ news_item.title }}</h3>
         <p> Description: {{ news_item.description }}
-        <a href="{{ news_item.link }}" target="_blank">Read more</a>
+            <a href="{{ news_item.link }}" target="_blank">Read more</a>
         </p>
 
-        <!-- Display the rating or 0 if not available -->
         <div>
             <p>Rating: {{ news_item.rating }}</p>
         </div>
+        <div class="stars">
 
-        <!-- Form to submit a new rating -->
-        <form method="post" action="{% url 'update_rating' %}">
-            {% csrf_token %}
-            <input type="hidden" name="news_id" value="{{ news_item.id }}">
-            <label for="new_rating">New Rating (1-5): </label>
-            <input type="number" name="new_rating" id="new_rating" min="1" max="5" required>
-            <button type="submit">Submit Rating</button>
-        </form>
+            <form method="post" action="{% url 'update_rating' %}" class="star-rating-form">
+                {% csrf_token %}
+                <input type="hidden" name="news_id" value="{{ news_item.id }}">
+
+                <div class="star-rating">
+                    <input type="radio" id="star1" name="new_rating" value="1" required>
+                    <label for="star5" title="1 stars"></label>
+
+                    <input type="radio" id="star2" name="new_rating" value="2">
+                    <label for="star4" title="2 stars"></label>
+
+                    <input type="radio" id="star3" name="new_rating" value="3">
+                    <label for="star3" title="3 stars"></label>
+
+                    <input type="radio" id="star4" name="new_rating" value="4">
+                    <label for="star2" title="4 stars"></label>
+
+                    <input type="radio" id="star5" name="new_rating" value="5">
+                    <label for="star1" title="5 star"></label>
+                </div>
+
+            </form>
+        </div>
     </li>
     {% endfor %}
 </ol>
