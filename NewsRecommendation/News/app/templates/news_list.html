@@ -27,37 +27,38 @@
     {% for news_item in news_data %}
     <li style="--i: {{ forloop.counter }}">
         <h3>{{ news_item.title }}</h3>
-        <p> Description: {{ news_item.description }}
+        <p>Description: {{ news_item.description }}
             <a href="{{ news_item.link }}" target="_blank">Read more</a>
         </p>
+        <div class="container d-flex justify-content-between mt-200">
+            <div class="col-md-6">
+                <div class="stars">
+                    <form method="post" action="{% url 'update_rating' %}" class="star-rating-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="news_id" value="{{ news_item.id }}">
 
-        <div>
-            <p>Rating: {{ news_item.rating }}</p>
-        </div>
-        <div class="stars">
+                        <div class="star-rating">
+                            <input class="star star-1" type="radio" id="star1" name="new_rating" value="1">
+                            <label class="star star-1" for="star1" title="1 stars"></label>
 
-            <form method="post" action="{% url 'update_rating' %}" class="star-rating-form">
-                {% csrf_token %}
-                <input type="hidden" name="news_id" value="{{ news_item.id }}">
+                            <input class="star star-2" type="radio" id="star2" name="new_rating" value="2">
+                            <label class="star star-2" for="star2" title="2 stars"></label>
 
-                <div class="star-rating">
-                    <input type="radio" id="star1" name="new_rating" value="1" required>
-                    <label for="star5" title="1 stars"></label>
+                            <input class="star star-3" type="radio" id="star3" name="new_rating" value="3">
+                            <label class="star star-3" for="star3" title="3 stars"></label>
 
-                    <input type="radio" id="star2" name="new_rating" value="2">
-                    <label for="star4" title="2 stars"></label>
+                            <input class="star star-4" type="radio" id="star4" name="new_rating" value="4">
+                            <label class="star star-4" for="star4" title="4 stars"></label>
 
-                    <input type="radio" id="star3" name="new_rating" value="3">
-                    <label for="star3" title="3 stars"></label>
+                            <input class="star star-1" type="radio" id="star5" name="new_rating" value="5">
+                            <label class="star star-1" for="star5" title="5 star"></label>
 
-                    <input type="radio" id="star4" name="new_rating" value="4">
-                    <label for="star2" title="4 stars"></label>
+                            <p>{{ news_item.rating }}</p>
 
-                    <input type="radio" id="star5" name="new_rating" value="5">
-                    <label for="star1" title="5 star"></label>
+                        </div>
+                    </form>
                 </div>
-
-            </form>
+            </div>
         </div>
     </li>
     {% endfor %}
