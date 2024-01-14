@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="{% static 'styles/login.css' %}">
 
 </head>
-<div class="login-container">
-    <h2>Already have an account? Login here:</h2>
-    <form id="loginForm" method="post" action="{% url 'user_login' %}">
+<body class="login-main-page">
+<h1 class="mess">AllNews</h1>
+<div class="login-box">
+    <div>
+        <h1>Login</h1>
+    </div>
+    <form id="login-form" method="post" action="{% url 'user_login' %}">
         {% csrf_token %}
         <div class="entry">
             <label for="username">Username:</label>
@@ -25,10 +29,13 @@
 
         <!-- Butonul de login cu tip submit -->
         <button type="submit" class="bttn-login">Login</button>
-    </form>
-    <p>Don't have an account? <a href="{% url 'create_user' %}">Register here</a>.</p>
+        <p>Don't have an account? <a href="{% url 'create_user' %}">Register here</a>.</p>
 
+    </form>
 </div>
+
+
+</body>
 
 
 <script>
