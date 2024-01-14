@@ -3,43 +3,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
-
     <link rel="stylesheet" href="{% static 'styles/login.css' %}">
-
 </head>
+
+
 <body class="login-main-page">
 <h1 class="mess">AllNews</h1>
+<img class="news" src="{% static 'img/news.svg' %}" alt="News">
 <div class="login-box">
-    <div>
+    <div class="title-img">
         <h1>Login</h1>
     </div>
     <form id="login-form" method="post" action="{% url 'user_login' %}">
         {% csrf_token %}
-        <div class="entry">
+        <div class="txt-field">
+            <span></span>
+            <input type="text" id="username" name="username" required>
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
+
         </div>
-        <div class="entry">
+        <div class="txt-field">
+            <span></span>
+            <input type="password" id="password" name="password" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
         </div>
 
-        <!-- Mesajul de eroare în caz de eșec la autentificare -->
         <div id="login-error-message" style="color: red;"></div>
 
-        <!-- Butonul de login cu tip submit -->
-        <button type="submit" class="bttn-login">Login</button>
+        <button type="submit" class="login-button">Login</button>
         <p>Don't have an account? <a href="{% url 'create_user' %}">Register here</a>.</p>
 
     </form>
 </div>
 
-
 </body>
 
-
 <script>
-    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+    document.getElementById("login-form").addEventListener("submit", async function (event) {
         event.preventDefault();
 
 

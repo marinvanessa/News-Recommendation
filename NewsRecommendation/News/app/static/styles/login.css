@@ -16,7 +16,7 @@
     font-weight: bold;
 }
 
-.login-main-page .ballroom {
+.login-main-page .news {
     width: 75%;
     height: 80vh;
 }
@@ -33,23 +33,19 @@
 }
 
 .login-box .title-img {
-    display: flex;
-    flex: 100%;
-    font-family: Hervetica;
+  display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    font-family: Helvetica; /* Corrected font-family */
     border-bottom: 2px solid #EEEEEE;
     color: #EEEEEE;
     padding-top: 10px;
 }
 
-.login-box .title-img .avatar {
-    display: flex;
-    flex: 50%;
-    width: 70px;
-    height: 70px;
-}
+
 .login-box .title-img h1{
-    display: flex;
-    flex: 50%;
+    margin: 0;
+    padding: 10px;
 }
 
 .login-box form {
