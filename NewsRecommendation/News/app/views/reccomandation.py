@@ -6,7 +6,7 @@ from app.models.likes import UserLikes
 from sklearn.metrics.pairwise import cosine_similarity
 
 from ..models.user import CustomUser
-from ..recommendation_new import matrix_factorization
+from ..matrix_factorization import matrix_factorization
 from scipy.sparse import csr_matrix
 from sklearn.decomposition import TruncatedSVD
 
@@ -24,7 +24,6 @@ def recommend(request, user_id):
     for rating in ratings:
         R[rating.user_id - 1][rating.news_id - 1] = rating.rating
 
-    # Convert the user-item interaction matrix to a sparse matrix
     # Convert the user-item interaction matrix to a sparse matrix
     R_sparse = csr_matrix(R)
 
@@ -71,11 +70,27 @@ def recommend(request, user_id):
 
     # Convert the set back to a list
     recommended_items = list(recommended_items_set)
-    print(recommended_items)
 
-    print(f"Recommendations for user {user_id} (ID 'b'):")
+    # Fetch the ratings given by the current user for the recommended items
+    user_ratings = UserLikes.objects.filter(user_id=user_id, news_id__in=[item.id for item in recommended_items])
 
-    for item in recommended_items:
-        print(f"ID: {item.id}, Title: {item.title}, Description: {item.description}, Link: {item.link}")
+    # Initialize an empty list to store recommended news data with ratings
+    recommended_news_data = []
 
-    return render(request, 'recommendations.html', {'recommendations': recommended_items})
+    # Iterate through each recommended news item and fetch the corresponding rating from UserLikes
+    for recommended_item in recommended_items:
+        # Get the rating for the current recommended news item if available, else set default to 0
+        rating = UserLikes.objects.filter(news=recommended_item, user_id=user_id).first()
+        rating_value = rating.rating if rating else 0
+
+        # Append recommended news data including the rating
+        recommended_news_data.append({
+            'id': recommended_item.id,
+            'title': recommended_item.title,
+            'description': recommended_item.description,
+            'link': recommended_item.link,
+            'rating': rating_value,
+        })
+
+    # Render the HTML template with the recommended news data
+    return render(request, 'recommendations.html', {'recommendations': recommended_news_data})

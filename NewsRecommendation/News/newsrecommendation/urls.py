@@ -15,13 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from app.controller.news import create_news_list, get_all_news, get_news_by_id, recommend_news, delete_news, delete_all_news
-from app.controller.user import create_user, get_all_users, get_user_by_id, delete_user, delete_all_users
+from app.views.news import create_news_list, get_all_news, get_news_by_id, recommend_news, delete_news, delete_all_news
+from app.views.user import create_user, get_all_users, get_user_by_id, delete_user, delete_all_users
 from django.contrib import admin
 from django.urls import path
-from app.controller.user import create_user
-from app.controller.views import recommend
-from app.controller.user import user_login
+from app.views.user import create_user
+from app.views.reccomandation import recommend
+from app.views.user import user_login
+from app.views.news import update_rating
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,4 +41,5 @@ urlpatterns = [
     path('recommend_news/<int:news_id>/', recommend_news, name='recommend_news'),
     path('recommend/<int:user_id>/', recommend, name='recommend'),
     path('login/', user_login, name='user_login'),
+    path('update_rating/', update_rating, name='update_rating'),
 ]

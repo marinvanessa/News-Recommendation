@@ -3,27 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News List</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        #newsList {
-            list-style-type: none;
-            padding: 0;
-        }
-        .newsItem {
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-    </style>
+    <!-- ... your head content ... -->
 </head>
 <body>
 
@@ -33,6 +13,20 @@
     {% for news_item in news_data %}
         <li class="newsItem">
             <strong>{{ news_item.title }}</strong>: {{ news_item.description }} - <a href="{{ news_item.link }}" target="_blank">Read more</a>
+
+            <!-- Display the rating or 0 if not available -->
+            <div>
+                <strong>Rating:</strong> {{ news_item.rating }}
+            </div>
+
+              <!-- Form to submit a new rating -->
+            <form method="post" action="{% url 'update_rating' %}">
+                {% csrf_token %}
+                <input type="hidden" name="news_id" value="{{ news_item.id }}">
+                <label for="new_rating">New Rating (1-5): </label>
+                <input type="number" name="new_rating" id="new_rating" min="1" max="5" required>
+                <button type="submit">Submit Rating</button>
+            </form>
         </li>
     {% endfor %}
 </ul>

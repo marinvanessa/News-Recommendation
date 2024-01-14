@@ -4,8 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from ..forms.news import (NewsForm)
 from ..models.news import News
-
-from ..recommendation import cleaning_data, calculate_matrix_of_similarity, recommend_top_news
+from ..models.likes import UserLikes
 
 
 @csrf_exempt
@@ -35,13 +34,57 @@ def create_news_list(request):
 @csrf_exempt
 def get_all_news(request):
     if request.method == 'GET':
+        # Fetch all news items
         news = News.objects.all()
-        news_data = [{'id': news_item.id, 'title': news_item.title, 'description': news_item.description, 'link': news_item.link} for news_item in news]
+
+        # Get the user's ID (None if not logged in)
+        # Get the user's ID from the session
+        user_id = request.session.get('user_id', None)
+
+        # Initialize an empty list to store news data with ratings
+        news_data = []
+
+        # Iterate through each news item and fetch the corresponding rating from UserLikes
+        for news_item in news:
+            # Get the rating for the current news item if available, else set default to 0
+            rating = UserLikes.objects.filter(news=news_item, user_id=user_id).first()
+            rating_value = rating.rating if rating else 0
+
+            # Append news data including the rating
+            news_data.append({
+                'id': news_item.id,
+                'title': news_item.title,
+                'description': news_item.description,
+                'link': news_item.link,
+                'rating': rating_value,
+            })
 
         # Render the HTML template with the news data
         return render(request, 'news_list.html', {'news_data': news_data})
     else:
         return JsonResponse({'error': 'Only GET requests are allowed'}, status=405)
+
+
+@csrf_exempt
+def update_rating(request):
+    if request.method == 'POST':
+        user_id = request.session.get('user_id', None)
+
+        # Get the news item and new rating from the form
+        news_id = request.POST.get('news_id')
+        new_rating = request.POST.get('new_rating')
+
+        # Update or create a UserLikes entry for the user and news item
+        user_likes, created = UserLikes.objects.update_or_create(
+            user_id=user_id,
+            news_id=news_id,
+            defaults={'rating': new_rating}
+        )
+
+        return redirect('get_all_news')  # You might want to redirect to a different page after submitting the form
+    else:
+        return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
+
 
 @csrf_exempt
 def get_news_by_id(request, news_id):

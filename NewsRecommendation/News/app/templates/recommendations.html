@@ -12,15 +12,29 @@
 <h1>Recommendations</h1>
 
 {% if recommendations %}
-    <ul>
-        {% for news_item in recommendations %}
-            <li>
-                <strong>{{ news_item.title }}</strong>: {{ news_item.description }} - <a href="{{ news_item.link }}" target="_blank">Read more</a>
-            </li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for news_item in recommendations %}
+    <li>
+        <strong>{{ news_item.title }}</strong>: {{ news_item.description }} - <a href="{{ news_item.link }}"
+                                                                                 target="_blank">Read more</a>
+        <!-- Display the rating or 0 if not available -->
+        <div>
+           <strong>Rating:</strong> {{ news_item.rating }}
+        </div>
+
+        <!-- Form to submit a new rating for recommended items -->
+        <form method="post" action="{% url 'update_rating' %}">
+            {% csrf_token %}
+            <input type="hidden" name="news_id" value="{{ news_item.id }}">
+            <label for="new_rating">New Rating (1-5): </label>
+            <input type="number" name="new_rating" id="new_rating" min="1" max="5" required>
+            <button type="submit">Submit Rating</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
 {% else %}
-    <p>No recommendations available.</p>
+<p>No recommendations available.</p>
 {% endif %}
 
 </body>
