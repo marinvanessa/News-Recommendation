@@ -35,23 +35,19 @@
             <a href="{{ news_item.link }}"
                target="_blank">Read more</a>
         </p>
-        <div>
-            <strong>Rating:</strong> {{ news_item.rating }}
-        </div>
 
-        <!-- Form to submit a new rating for recommended items -->
         <form method="post" action="{% url 'update_rating' %}">
             {% csrf_token %}
             <input type="hidden" name="news_id" value="{{ news_item.id }}">
-            <label for="new_rating">New Rating (1-5): </label>
-            <input type="number" name="new_rating" id="new_rating" min="1" max="5" required>
-            <button type="submit">Submit Rating</button>
+            <label for="new_rating">Rating: {{ news_item.rating }} </label>
+            <input type="range" name="new_rating" id="new_rating" min="1" max="5">
+             <button class="button-1">Submit Rating</button>
         </form>
     </li>
     {% endfor %}
 </ol>
 <a href="{% url 'get_all_news' %}">
-    <button>Home</button>
+    <button class="fixed-home-button">Home</button>
 </a>
 
 {% else %}

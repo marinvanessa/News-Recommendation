@@ -10,19 +10,6 @@
 
 <h1>News List</h1>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const starRatingForm = document.querySelector('.star-rating-form');
-        const starInputs = document.querySelectorAll('.star-rating input');
-
-        starInputs.forEach(function (input) {
-            input.addEventListener('click', function () {
-                starRatingForm.submit();
-            });
-        });
-    });
-</script>
-
 <ol style="--length: {{ news_data|length }}" role="list">
     {% for news_item in news_data %}
     <li style="--i: {{ forloop.counter }}">
@@ -30,24 +17,16 @@
         <p> Description: {{ news_item.description }}
             <a href="{{ news_item.link }}" target="_blank">Read more</a>
         </p>
+        <form method="post" action="{% url 'update_rating' %}">
+            {% csrf_token %}
+            <input type="hidden" name="news_id" value="{{ news_item.id }}">
+            <label for="new_rating">Rating: {{ news_item.rating }} </label>
+            <input type="range" name="new_rating" id="new_rating" min="1" max="5" required>
 
-        <div>
-            <p>Rating: {{ news_item.rating }}</p>
-        </div>
-        <div class="container d-flex justify-content-center mt-200">
-            <div class="col-md-12">
-                <div class="stars">
-                    <!-- Form to submit a new rating for recommended items -->
-                    <form method="post" action="{% url 'update_rating' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="news_id" value="{{ news_item.id }}">
-                        <label for="new_rating">New Rating (1-5): </label>
-                        <input type="number" name="new_rating" id="new_rating" min="1" max="5" required>
-                        <button type="submit">Submit Rating</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+            <button class="button-1">Submit Rating</button>
+
+        </form>
+
     </li>
     {% endfor %}
 </ol>
@@ -64,7 +43,7 @@
     {% if request.session.user_id %}
     <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
-        <button type="submit">Logout</button>
+        <button type="submit" class="fixed-home-button">Logout</button>
     </form>
     {% endif %}
 </div>
