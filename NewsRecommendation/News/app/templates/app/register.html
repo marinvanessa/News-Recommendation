@@ -8,27 +8,43 @@
     <title>User Registration</title>
     <link rel="stylesheet" href="{% static 'styles/register.css' %}">
 </head>
+
+
 <body>
-<h2>User Registration</h2>
-<form id="registrationForm" method="post" action="{% url 'create_user' %}">
-    {% csrf_token %}
-    <label for="first_name">First Name:</label>
-    <input type="text" id="first_name" name="first_name" required><br>
-    <label for="last_name">Last Name:</label>
-    <input type="text" id="last_name" name="last_name" required><br>
-    <label for="email">E-mail:</label>
-    <input type="text" id="email" name="email" required><br>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br>
-    <label for="password">Password:</label>
-    <input type="text" id="password" name="password" required><br>
 
-    <!-- Placeholder for error message -->
-    <div id="error-message" style="color: red;"></div>
+<div class="register-container">
+    <h2>User Registration</h2>
+    <form id="registrationForm" method="post" action="{% url 'create_user' %}" class="register-form">
+        {% csrf_token %}
+        <div class="entry-reg">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required><br>
+        </div>
+        <div class="entry-reg">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required><br>
+        </div>
+        <div class="entry-reg">
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email" required><br>
+        </div>
+        <div class="entry-reg">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+        </div>
+        <div class="entry-reg">
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" required><br>
+        </div>
 
-    <!-- Butonul de înregistrare cu tip submit -->
-    <button type="submit">Register</button>
-</form>
+
+        <!-- Placeholder for error message -->
+        <div id="error-message" style="color: red;"></div>
+
+        <!-- Butonul de înregistrare cu tip submit -->
+        <button type="submit" class="bttn-register">Register</button>
+    </form>
+</div>
 
 
 <script>
