@@ -84,7 +84,7 @@ def update_rating(request):
         new_rating = request.POST.get('new_rating')
 
         # Handle default value
-        if new_rating == '-1':
+        if new_rating is None:
             # Do something for the default value (e.g., reset or ignore)
             pass
         else:
@@ -98,7 +98,6 @@ def update_rating(request):
         return redirect('get_all_news')  # Redirect to a different page after submitting the form
     else:
         return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
-
 
 @csrf_exempt
 def get_news_by_id(request, news_id):

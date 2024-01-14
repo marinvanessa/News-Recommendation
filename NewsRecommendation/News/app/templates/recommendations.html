@@ -40,7 +40,7 @@
             {% csrf_token %}
             <input type="hidden" name="news_id" value="{{ news_item.id }}">
             <label for="new_rating">Rating: {{ news_item.rating }} </label>
-            <input type="range" name="new_rating" id="new_rating" min="1" max="5">
+            <input type="range" name="new_rating" id="new_rating" min="0" max="6">
              <button class="button-1">Submit Rating</button>
         </form>
     </li>
