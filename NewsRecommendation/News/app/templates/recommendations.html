@@ -1,11 +1,12 @@
 <!-- your_app/templates/recommendations.html -->
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recommendations</title>
+    <link rel="stylesheet" href="{% static 'styles/recommendations.css' %}">
 </head>
 <body>
 
@@ -16,11 +17,14 @@
 <ul>
     {% for news_item in recommendations %}
     <li>
-        <strong>{{ news_item.title }}</strong>: {{ news_item.description }} - <a href="{{ news_item.link }}"
-                                                                                 target="_blank">Read more</a>
+        <h3>{{ news_item.title }}</h3>
+        <p>{{ news_item.description }}
+            <a href="{{ news_item.link }}"
+               target="_blank">Read more</a>
+        </p>
         <!-- Display the rating or 0 if not available -->
         <div>
-           <strong>Rating:</strong> {{ news_item.rating }}
+            <strong>Rating:</strong> {{ news_item.rating }}
         </div>
 
         <!-- Form to submit a new rating for recommended items -->
@@ -34,7 +38,9 @@
     </li>
     {% endfor %}
 </ul>
-<a href="{% url 'get_all_news' %}"><button>Home</button></a>
+<a href="{% url 'get_all_news' %}">
+    <button>Home</button>
+</a>
 
 {% else %}
 <p>No recommendations available.</p>

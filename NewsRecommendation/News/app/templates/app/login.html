@@ -17,7 +17,7 @@
         </div>
         <div class="entry">
             <label for="password">Password:</label>
-            <input type="text" id="password" name="password" required><br>
+            <input type="password" id="password" name="password" required><br>
         </div>
 
         <!-- Mesajul de eroare în caz de eșec la autentificare -->
@@ -43,8 +43,9 @@
                 "X-CSRFToken": "{{ csrf_token }}",
             },
             body: JSON.stringify({
-                username: document.getElementById("login-username").value,
-                password: document.getElementById("login-password").value,
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+
             }),
         });
 

@@ -6,7 +6,12 @@ from ..forms.news import (NewsForm)
 from ..models.news import News
 from ..models.likes import UserLikes
 
+def logout_view(request):
+    # Clear user session or perform any other logout actions
+    request.session.clear()
 
+    # Redirect to the home page or any other desired page
+    return redirect('get_all_news')  # Assuming 'get_all_news' is the name of your home page URL pattern
 @csrf_exempt
 def create_news_list(request):
     if request.method == 'POST':

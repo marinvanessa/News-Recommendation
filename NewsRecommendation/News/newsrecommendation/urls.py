@@ -23,6 +23,7 @@ from app.views.user import create_user
 from app.views.reccomandation import recommend
 from app.views.user import user_login
 from app.views.news import update_rating
+from app.views.news import logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,4 +43,5 @@ urlpatterns = [
     path('recommend/<int:user_id>/', recommend, name='recommend'),
     path('login/', user_login, name='user_login'),
     path('update_rating/', update_rating, name='update_rating'),
+    path('logout/', logout_view, name='logout'),
 ]
