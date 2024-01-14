@@ -1,9 +1,10 @@
 <!-- your_app/templates/news_list.html -->
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ... your head content ... -->
+    <link rel="stylesheet" href="{% static 'styles/news_list.css' %}">
 </head>
 <body>
 
@@ -11,30 +12,43 @@
 
 <ul id="newsList">
     {% for news_item in news_data %}
-        <li class="newsItem">
-            <strong>{{ news_item.title }}</strong>: {{ news_item.description }} - <a href="{{ news_item.link }}" target="_blank">Read more</a>
+    <li class="newsItem">
+        <h3>{{ news_item.title }}</h3>
+        <p>{{ news_item.description }}
+        <a href="{{ news_item.link }}" target="_blank">Read more</a>
+        </p>
 
-            <!-- Display the rating or 0 if not available -->
-            <div>
-                <strong>Rating:</strong> {{ news_item.rating }}
-            </div>
+        <!-- Display the rating or 0 if not available -->
+        <div>
+            <strong>Rating:</strong> {{ news_item.rating }}
+        </div>
 
-              <!-- Form to submit a new rating -->
-            <form method="post" action="{% url 'update_rating' %}">
-                {% csrf_token %}
-                <input type="hidden" name="news_id" value="{{ news_item.id }}">
-                <label for="new_rating">New Rating (1-5): </label>
-                <input type="number" name="new_rating" id="new_rating" min="1" max="5" required>
-                <button type="submit">Submit Rating</button>
-            </form>
-        </li>
+        <!-- Form to submit a new rating -->
+        <form method="post" action="{% url 'update_rating' %}">
+            {% csrf_token %}
+            <input type="hidden" name="news_id" value="{{ news_item.id }}">
+            <label for="new_rating">New Rating (1-5): </label>
+            <input type="number" name="new_rating" id="new_rating" min="1" max="5" required>
+            <button type="submit">Submit Rating</button>
+        </form>
+    </li>
     {% endfor %}
 </ul>
 <div class="recommendationButton">
     {% if request.session.user_id %}
-        <a href="{% url 'recommend' user_id=request.session.user_id %}" class="button">Get Recommendations</a>
+    <a href="{% url 'recommend' user_id=request.session.user_id %}" class="button">Get Recommendations</a>
     {% else %}
-        <a href="{% url 'user_login' %}" class="button">Login to Get Recommendations</a>
+    <a href="{% url 'user_login' %}" class="button">Login to Get Recommendations</a>
+    {% endif %}
+</div>
+
+<!-- Logout button -->
+<div class="logoutButton">
+    {% if request.session.user_id %}
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
     {% endif %}
 </div>
 </body>
