@@ -1,10 +1,13 @@
 import json
+
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseServerError
-from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
 from ..forms.news import (NewsForm)
-from ..models.news import News
 from ..models.likes import UserLikes
+from ..models.news import News
+
 
 def logout_view(request):
     # Clear user session or perform any other logout actions
@@ -12,6 +15,8 @@ def logout_view(request):
 
     # Redirect to the home page or any other desired page
     return redirect('get_all_news')  # Assuming 'get_all_news' is the name of your home page URL pattern
+
+
 @csrf_exempt
 def create_news_list(request):
     if request.method == 'POST':
@@ -70,7 +75,6 @@ def get_all_news(request):
         return JsonResponse({'error': 'Only GET requests are allowed'}, status=405)
 
 
-@csrf_exempt
 def update_rating(request):
     if request.method == 'POST':
         user_id = request.session.get('user_id', None)
@@ -79,14 +83,19 @@ def update_rating(request):
         news_id = request.POST.get('news_id')
         new_rating = request.POST.get('new_rating')
 
-        # Update or create a UserLikes entry for the user and news item
-        user_likes, created = UserLikes.objects.update_or_create(
-            user_id=user_id,
-            news_id=news_id,
-            defaults={'rating': new_rating}
-        )
+        # Handle default value
+        if new_rating == '-1':
+            # Do something for the default value (e.g., reset or ignore)
+            pass
+        else:
+            # Update or create a UserLikes entry for the user and news item
+            user_likes, created = UserLikes.objects.update_or_create(
+                user_id=user_id,
+                news_id=news_id,
+                defaults={'rating': new_rating}
+            )
 
-        return redirect('get_all_news')  # You might want to redirect to a different page after submitting the form
+        return redirect('get_all_news')  # Redirect to a different page after submitting the form
     else:
         return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
 
@@ -102,6 +111,7 @@ def get_news_by_id(request, news_id):
             return HttpResponseNotFound('News not found')
     else:
         return JsonResponse({'error': 'Only GET requests are allowed'}, status=405)
+
 
 @csrf_exempt
 def recommend_news(request, news_id):

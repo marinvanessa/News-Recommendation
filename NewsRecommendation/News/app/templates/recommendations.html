@@ -12,17 +12,29 @@
 
 <h1>Recommendations</h1>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const starRatingForm = document.querySelector('.star-rating-form');
+        const starInputs = document.querySelectorAll('.star-rating input');
+
+        starInputs.forEach(function (input) {
+            input.addEventListener('click', function () {
+                starRatingForm.submit();
+            });
+        });
+    });
+</script>
+
 
 {% if recommendations %}
-<ul>
+<ol style="--length: {{ news_data|length }}" role="list">
     {% for news_item in recommendations %}
-    <li>
+    <li style="--i: {{ forloop.counter }}">
         <h3>{{ news_item.title }}</h3>
-        <p>{{ news_item.description }}
+        <p>Descriere: {{ news_item.description }}
             <a href="{{ news_item.link }}"
                target="_blank">Read more</a>
         </p>
-        <!-- Display the rating or 0 if not available -->
         <div>
             <strong>Rating:</strong> {{ news_item.rating }}
         </div>
@@ -37,7 +49,7 @@
         </form>
     </li>
     {% endfor %}
-</ul>
+</ol>
 <a href="{% url 'get_all_news' %}">
     <button>Home</button>
 </a>

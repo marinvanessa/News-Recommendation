@@ -95,9 +95,3 @@ li::before {
     left: 0;
     background: var(--brandColor);
 }
-
-.stars {
-    width: 270px;
-    display: inline-block;
-}
-
