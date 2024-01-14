@@ -98,69 +98,69 @@ li::before {
 
 
 .send-rating {
-  background-color: #262626;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    background-color: #262626;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
 .button-1 {
-  position: relative;
-  background-color:var(--brandColor);
-  border-radius: 4em;
-  font-size: 10px;
-  color: white;
-  padding: 0.8em 1.8em;
-  cursor:pointer;
-  user-select:none;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition-duration: 0.4s;
-  -webkit-transition-duration: 0.4s; /* Safari */
+    position: relative;
+    background-color: var(--brandColor);
+    border-radius: 4em;
+    font-size: 10px;
+    color: white;
+    padding: 0.8em 1.8em;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s; /* Safari */
 }
 
 .button-1:hover {
-  transition-duration: 0.1s;
-  background-color: var(--brandColor);
+    transition-duration: 0.1s;
+    background-color: var(--brandColor);
 }
 
 .button-1:after {
-  content: "";
-  display: block;
-  position: absolute;
-  border-radius: 4em;
-  left: 0;
-  top:0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: all 0.5s;
-  box-shadow: 0 0 10px 40px var(--brandColor);
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 4em;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+    box-shadow: 0 0 10px 40px var(--brandColor);
 }
 
 .button-1:active:after {
-  box-shadow: 0 0 0 0 var(--brandColor);
-  position: absolute;
-  border-radius: 4em;
-  left: 0;
-  top:0;
-  opacity: 1;
-  transition: 0s;
+    box-shadow: 0 0 0 0 var(--brandColor);
+    position: absolute;
+    border-radius: 4em;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    transition: 0s;
 }
 
 .button-1:active {
-  top: 1px;
+    top: 1px;
 }
 
 
-.fixed-home-button {
+.floating-button-container {
     position: fixed;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
     background-color: var(--brandColor);
     color: white;
@@ -173,6 +173,13 @@ li::before {
     text-decoration: none;
 }
 
-.fixed-home-button:hover {
-    background-color: var(--brandColor);
-}
+/*.floating-button-container:hover {*/
+/*    background-color: var(--brandColor);*/
+/*}*/
+
+/*.floating-button-container {*/
+/*    position: fixed;*/
+/*    top: 20px;*/
+/*    left: 20px;*/
+/*    z-index: 1;*/
+/*}*/
