@@ -21,10 +21,8 @@ def user_login(request):
         username = data.get('username')
         password = data.get('password')
 
-        # Get all users
         users = CustomUser.objects.all()
 
-        # Check if there's a user with the provided username and password
         user = None
         for u in users:
             if u.username == username and check_password(password, u.password):
@@ -35,14 +33,12 @@ def user_login(request):
             request.session['user_id'] = user.id
 
             login(request, user)
-            # Send the redirect URL in the JSON response
-            redirect_url = reverse('get_all_news')  # Change this to the correct URL name
+            redirect_url = reverse('get_all_news')
             return JsonResponse({'message': 'Login successful', 'user_id': user.id, 'redirect_url': redirect_url})
         else:
             return JsonResponse({'error': 'Invalid credentials'}, status=401)
 
     elif request.method == 'GET':
-        # Render the login page or redirect to it
         return render(request, 'app/login.html')
 
     else:
@@ -59,7 +55,6 @@ def create_user(request):
 
         if form.is_valid():
             user = form.save()
-            # Redirect to the login page after successful registration
             return JsonResponse({'message': 'User created successfully', 'user_id': user.id})
         else:
             return JsonResponse({'error': 'Invalid data'}, status=400)

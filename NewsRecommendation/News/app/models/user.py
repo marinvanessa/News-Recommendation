@@ -21,7 +21,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    # Add related_name to resolve clashes
     groups = models.ManyToManyField(Group, related_name='customuser_set', blank=True,
                                     help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.')
     user_permissions = models.ManyToManyField(Permission, related_name='customuser_set', blank=True,

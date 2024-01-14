@@ -1,11 +1,13 @@
 import numpy as np
-import pandas as pd
-import scipy
+
 
 def matrix_factorization(R, K=10, steps=5000, alpha=0.0002, beta=0.02):
     num_users, num_items = R.shape
     P = np.random.rand(num_users, K)
     Q = np.random.rand(num_items, K)
+
+    print(f"num_users: {num_users}, num_items: {num_items}")
+    print(f"Shape of P: {P.shape}, Shape of Q: {Q.shape}")
 
     for step in range(steps):
         for i in range(num_users):

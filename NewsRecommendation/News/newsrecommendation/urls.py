@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from app.views.news import create_news_list, get_all_news, get_news_by_id, recommend_news, delete_news, delete_all_news
+from app.views.news import create_news_list, get_all_news, get_news_by_id, delete_news, delete_all_news
 from app.views.user import create_user, get_all_users, get_user_by_id, delete_user, delete_all_users
 from django.contrib import admin
 from django.urls import path
@@ -39,7 +39,6 @@ urlpatterns = [
     path('get_news_by_id/<int:news_id>/', get_news_by_id, name='get_news_by_id'),
     path('delete_all_news/', delete_all_news, name='delete_all_news'),
     path('delete_all_news/', delete_all_news, name='delete_all_news'),
-    path('recommend_news/<int:news_id>/', recommend_news, name='recommend_news'),
     path('recommend/<int:user_id>/', recommend, name='recommend'),
     path('login/', user_login, name='user_login'),
     path('update_rating/', update_rating, name='update_rating'),
