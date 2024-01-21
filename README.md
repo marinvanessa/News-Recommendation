@@ -3,6 +3,9 @@
 
 ## LoginPage
 
+
+![Login Page] (NewsRecommendation/loginPage.png)
+
 ## Register Page
 
 ![Register Page] (NewsRecommendation/registerPage.png)
