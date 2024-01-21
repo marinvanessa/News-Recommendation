@@ -1,5 +1,12 @@
 # News Recommendation
 
+
+### LoginPage
+
+### Register Page
+
+### Flow of the Application
+
 ![Aici](NewsRecommendation/NewsRecommendation.gif)
 
 ## Data
