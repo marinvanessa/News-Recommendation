@@ -1,5 +1,6 @@
 # News Recommendation
 
+The proposed project involves the development of a news recommendation application, centered around user experience and powered by advanced techniques such as collaborative filtering based on matrix factorization and cosine similarity measurement within a user-based framework.
 
 ## LoginPage
 
