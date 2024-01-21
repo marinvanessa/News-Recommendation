@@ -1,11 +1,13 @@
 # News Recommendation
 
 
-### LoginPage
+## LoginPage
 
-### Register Page
+## Register Page
 
-### Flow of the Application
+![Register Page] (NewsRecommendation/registerPage.png)
+
+## Flow of the Application
 
 ![Aici](NewsRecommendation/NewsRecommendation.gif)
 
