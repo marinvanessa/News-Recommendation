@@ -1,4 +1,4 @@
-### News Recommendation
+# News Recommendation
 
 ![Aici](NewsRecommendation/NewsRecommandation.gif)
 
