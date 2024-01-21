@@ -4,11 +4,11 @@
 ## LoginPage
 
 
-![Login Page] (NewsRecommendation/loginPage.png)
+![Login Page](NewsRecommendation/loginPage.png)
 
 ## Register Page
 
-![Register Page] (NewsRecommendation/registerPage.png)
+![Register Page](NewsRecommendation/registerPage.png)
 
 ## Flow of the Application
 
