@@ -1,3 +1,3 @@
 ### Project
 
-![Aici](News-Recommendation/NewsRecommendation/NewsRecommandation.gif)
+![Aici](NewsRecommendation/NewsRecommandation.gif)
