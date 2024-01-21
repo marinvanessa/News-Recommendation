@@ -8,6 +8,10 @@
 
 I used a large dataset from BBC with 25,642 news articles to build a news recommendation app. I saved 1,000 articles in a PostgreSQL database for the app to work with. This approach ensures the app has a solid base for providing accurate recommendations.
 
+**adding_data.py:** (u have to introduce the number of users and news that u want to populate with data)
+
+Generates random ratings for a specified number of users and news articles, simulating user interactions. The generated ratings, ranging between 0 and 5, are then saved in the database through the UserLikes model. This script is useful for populating the database with synthetic data for testing and development purposes, ensuring a diverse set of user preferences and interactions.
+
 ## Recommendation Algorithm 
 
 **matrix_factorization.py:**
