@@ -1,6 +1,6 @@
 # News Recommendation
 
-![Aici](NewsRecommendation/NewsRecommandation.gif)
+![Aici](NewsRecommendation/NewsRecommendation.gif)
 
 ## Data
 
