@@ -12,7 +12,7 @@
 
 ## Flow of the Application
 
-![Aici](NewsRecommendation/NewsRecommendation.gif)
+![Getting recommendations](NewsRecommendation/NewsRecommendation.gif)
 
 ## Data
 
